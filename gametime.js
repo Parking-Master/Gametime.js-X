@@ -62,7 +62,7 @@ window.gametime = {
       message: `#create|${event.trim()}#${handler.toString()}`
     }, function(e, n) {});
   },
-  run: function(event, parameters = [], eventCount = null, stopWhen = null) {
+  run: function(event, parameters = [], eventCount = 1, stopWhen = null) {
     if (!(Object.keys(gametime.events).indexOf(event.trim()) > -1)) return gametime.logger.error("Couldn't find function \"" + event + "\". Create it using `gametime.on()`");
     function names(func) {
       let str = func.toString().replace(/((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg, "");
