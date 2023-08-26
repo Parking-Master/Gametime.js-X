@@ -76,13 +76,15 @@ window.gametime = {
       channel: gametime.channel,
       message: `#run|${eventCount || 1},${pid}#${func.toString()}`
     }, function(e, n) {});
-    let e;
-    if (stopWhen) e = setInterval(() => {
-      if (eval(stopWhen)) gametime.pubnub.publish({
-        channel: gametime.channel,
-        message: `#kill|${pid}`
-      }, function(e, n) {});
-    }), clearInterval(e);
+    if (eventCount > 1) {
+      let e;
+      if (stopWhen) e = setInterval(() => {
+        if (eval(stopWhen)) gametime.pubnub.publish({
+          channel: gametime.channel,
+          message: `#kill|${pid}`
+        }, function(e, n) {});
+      }), clearInterval(e);
+    }
   },
   pids: {},
   events: {},
@@ -140,12 +142,14 @@ window.gametime = {
             let eventCount = (type.split("|")[1] || "1,0").split(",")[0].trim() - 0;
             let pid = (type.split("|")[1] || "1,0").split(",")[1].trim() - 0;
             let i = 0;
-            let pidInterval = setInterval(() => {
-              if (!(i < eventCount)) return delete gametime.pids[pid], clearInterval(pidInterval);
-              i++;
-              new Function("(" + func + ")()")();
-            });
-            gametime.pids[pid] = pidInterval;
+            if (eventCount > 1) {
+              let pidInterval = setInterval(() => {
+                if (!(i < eventCount)) return delete gametime.pids[pid], clearInterval(pidInterval);
+                i++;
+                new Function("(" + func + ")()")();
+              });
+              gametime.pids[pid] = pidInterval;
+            } else new Function("(" + func + ")()")();
           }
           if (type.startsWith("create")) gametime.events[type.split("|")[1]] = new Function(`return ${func}`)();
           if (type.startsWith("kill")) clearInterval(gametime.pids[type.split("|")[1] - 0]), delete gametime.pids[type.split("|")[1] - 0];
