@@ -109,7 +109,7 @@ window.gametime = {
     const e = encodeURIComponent(`function() { gametime.loadTime = Date.now() - gametime.loadTime; gametime.player.uuid === "${gametime.player.uuid}" && gametime.logger.success("Successfully connected to API (" + gametime.loadTime + "ms)"); gametime.players.unshift({ uuid: "${gametime.player.uuid}", position: 1 }); if (gametime.player.uuid != "${gametime.player.uuid}" && ${firstTime}) gametime.start(false) }`);
     gametime.pubnub.publish({
       channel: gametime.channel,
-      message: `#run#${e}`
+      message: `#run|1,0#${e}`
     }, function(e, n) {
       if (e.error) {
         gametime.connected = false;
@@ -230,7 +230,7 @@ window.gametime = {
     const e = encodeURIComponent(`function() { (typeof gametime.ondisconnect === "function" && gametime.ondisconnect()); let uuid = "${playerUUID}"; gametime.players.splice(${playerPosition}, 1); gametime.logger.warn("Player ${playerPosition} disconnected") }`);
     gametime.pubnub.publish({
       channel: gametime.channel,
-      message: `#run#${e}`
+      message: `#run|1,0#${e}`
     }, function(e, n) {});
   },
   sustain: async function() {
