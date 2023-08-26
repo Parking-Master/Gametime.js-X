@@ -142,7 +142,7 @@ window.gametime = {
             path: "/"
           });
           window.PubNub = function() {
-            this.publish = function(listener, callback) { let data = btoa(encodeURIComponent(JSON.stringify(listener))); socket.emit("data", data); callback({}) };
+            this.publish = function(listener, callback = () => {}) { let data = btoa(encodeURIComponent(JSON.stringify(listener))); socket.emit("data", data); callback({}) };
             this.subscribe = function() {};
             this.addListener = function(listener) {
               if (listener["message"]) {
