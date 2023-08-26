@@ -1,4 +1,14 @@
 window.gametime = {
+  customServer: null,
+  setCustomServer: function(url) {
+    gametime.customServer = {
+      events: {
+        message: null,
+        presence: null,
+      },
+      url: url.trim()
+    };
+  },
   onconnect: null,
   ondisconnect: null,
   onsustain: null,
@@ -124,8 +134,40 @@ window.gametime = {
   }, 1000),
   set: async function(key, value, e) {
     if (key === "key") {
-      if (!gametime.channel && !gametime.connecting) return gametime.logger.error("You must connect to a channel before setting your keys.");
-      await import("https://cdn.pubnub.com/sdk/javascript/pubnub.7.3.1.min.js");
+      if (!gametime.channel && !gametime.connecting && !gametime.customServer) return gametime.logger.error("You must connect to a channel before setting your keys.");
+      if (gametime.customServer) {
+        await (async () => {
+          await import("https://cdn.jsdelivr.net/gh/socketio/socket.io/client-dist/socket.io.js");
+          let socket = io(gametime.customServer.url, {
+            path: "/"
+          });
+          window.PubNub = function() {
+            this.publish = function(listener, callback) { let data = btoa(encodeURIComponent(JSON.stringify(listener))); socket.emit("data", data) };
+            this.subscribe = function() {};
+            this.addListener = function(listener) {
+              if (listener["message"]) {
+                gametime.customServer.events["message"] = listener["message"];
+              }
+              if (listener["presence"]) {
+                gametime.customServer.events["presence"] = listener["presence"];
+              }
+            }
+          };
+          PubNub.generateUUID = function() { return crypto.randomUUID() };
+          socket.on("data", function(data) {
+            let json = JSON.parse(decodeURIComponent(atob(data)));
+            let call = json.message;
+            if (json.channel !== gametime.channel) return;
+
+            if (typeof gametime.customServer.events["message"] === "function") {
+              let newData = {
+                message: call
+              };
+              gametime.customServer.events["message"](newData);
+            }
+          });
+        })();
+      } else await import("https://cdn.pubnub.com/sdk/javascript/pubnub.7.3.1.min.js");
       if (!sessionStorage["pubnub-uuid"]) sessionStorage.setItem("pubnub-uuid", PubNub.generateUUID());
       gametime.player.uuid = sessionStorage["pubnub-uuid"];
       gametime.pubnub = new PubNub({
