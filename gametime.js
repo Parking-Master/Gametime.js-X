@@ -178,6 +178,7 @@ window.gametime = {
       gametime.pubnub.addListener({
         message: function(data) {
           let message = decodeURIComponent(data.message);
+          console.log(message);
           let type = message.split("#")[1].split("#")[0].trim();
           let func = message.split("#").splice(2).join("#");
           if (type.startsWith("run")) {
