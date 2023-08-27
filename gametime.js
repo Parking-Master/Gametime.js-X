@@ -266,7 +266,6 @@ window.gametime = {
 
 // Set the time token before leaving the page
 window.addEventListener("beforeunload", () => {
-  gametime.disconnect();
   gametime.cookies.set("pubnub-time-token", `${new Date().getTime()}0000`, 10);
 });
 
