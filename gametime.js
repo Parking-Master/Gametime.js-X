@@ -1,4 +1,11 @@
 window.gametime = {
+  uuidv4: function() {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+      let r = Math.random() * 16 | 0;
+      let v = (c == "x" ? r : (r & 0x3 | 0x8));
+      return v.toString(16);
+    });
+  },
   customServer: null,
   setCustomServer: function(url) {
     gametime.customServer = {
@@ -153,7 +160,7 @@ window.gametime = {
               }
             }
           };
-          PubNub.generateUUID = function() { return crypto.randomUUID() };
+          PubNub.generateUUID = function() { return gametime.uuidv4() };
           socket.on("data", function(data) {
             let json = JSON.parse(decodeURIComponent(atob(data)));
             let call = json.message;
