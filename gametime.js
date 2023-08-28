@@ -130,7 +130,7 @@ window.gametime = {
           gametime.players = gametime.players.reduce(function(p, c) { if (!p.some(function (el) { return el.uuid === c.uuid })) p.push(c); return p }, []);
           gametime.connectedPlayers = Object.keys(gametime.players).length;
           gametime.players.forEach(player => gametime.players[gametime.players.indexOf(player)].position = gametime.players.map(n => n.uuid).indexOf(player.uuid) + 1);
-          if (gametime.players.length > 0 && gametime.player && gametime.player.uuid) gametime.player = gametime.players.filter(player => player.uuid === gametime.player.uuid)[0];
+          if (gametime.players.length > 0 && gametime.player && gametime.player.uuid && gametime.connected && gametime.players.filter(player => player.uuid === gametime.player.uuid)[0]) gametime.player = gametime.players.filter(player => player.uuid === gametime.player.uuid)[0];
         }, 100);
         gametime.logger.info("Player " + gametime.connectedPlayers + " connected");
         if (typeof gametime.onconnect === "function") {
