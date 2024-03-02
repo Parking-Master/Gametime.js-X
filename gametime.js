@@ -7,7 +7,13 @@ window.gametime = {
     });
   },
   customServer: null,
-  setCustomServer: function(url) {
+  setCustomServer: async function(url) {
+    try {
+      let response = await fetch(url);
+      if (response.status > 400) return gametime.logger.warn("The specified socket server for Gametime.js did not respond. Switching to PubNub instead.");
+    } catch {
+      return gametime.logger.warn("The specified socket server for Gametime.js did not respond. Switching to PubNub instead.");
+    }
     gametime.customServer = {
       events: {
         message: null,
