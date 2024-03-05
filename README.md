@@ -125,7 +125,43 @@ You can call the function whatever you want (in this example, "postMessage"), an
 <img src="icons/notebook.svg"> Note: These are all methods apart of the global `gametime` variable when the API is installed (e.g. `gametime.on()`, `gametime.run()`, etc.)
 
 ### └ Examples
-Chat room (HTML page):
+Example on sending arguments through a function:
+
+```javascript
+gametime.on("myCustomFunction", function(arg1, arg2, arg3) {
+  console.log(arg1, arg2, arg3);
+  // Output: "foo bar baz"
+});
+
+let arg1 = "foo";
+let arg2 = "bar";
+let arg3 = "baz";
+
+gametime.run("myCustomFunction", [arg1, arg2, arg3]);
+```
+
+Example of setting the max amount of players/users:
+
+```javascript
+// The default is 16
+gametime.maxPlayers = 3;
+```
+Example of setting the socket server:
+
+
+```javascript
+// Replace SERVER_URL with the URL to your socket server
+gametime.setCustomServer(SERVER_URL);
+
+// For example, this is the public socket server for Gametime.js-X
+gametime.setCustomServer("https://caribou-needed-implicitly.ngrok-free.app");
+```
+
+Example chat room page:
+
+<details>
+  <summary>Click to expand</summary>
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -196,6 +232,12 @@ Chat room (HTML page):
 </html>
 ```
 
+</details>
+
+[Live example of this page](https://parking-master.github.io/Gametime.js-X/example_chat.html)
+
+<br>
+<br>
 For other open-source examples, see [FPS-X](https://github.com/Parking-Master/FPS-X) which is an open source FPS game that you can build yourself with Gametime.js-X and pure JavaScript.
 
 ## License
