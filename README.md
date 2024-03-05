@@ -238,6 +238,7 @@ Example chat room page:
 
 <br>
 <br>
+
 For other open-source examples, see [FPS-X](https://github.com/Parking-Master/FPS-X) which is an open source FPS game that you can build yourself with Gametime.js-X and pure JavaScript.
 
 ## License
