@@ -234,7 +234,7 @@ window.gametime = {
     let playerIndex = gametime.players.map(player => player.uuid).indexOf(gametime.player.uuid);
     let playerPosition = gametime.player.position;
     gametime.players.splice(playerIndex, 1);
-    gametime.pubnub.disconnect();
+    if (gametime.pubnub.disconnect) gametime.pubnub.disconnect();
     sessionStorage.removeItem("pubnub-uuid");
     clearInterval(gametime.playerSetter);
     gametime.player = { uuid: null, position: 1 };
