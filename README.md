@@ -131,45 +131,41 @@ Chat room (HTML page):
 <html>
   <head>
     <title>Gametime.js-X chat room</title>
-    <style>
-      body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-      #form { background: rgba(0, 0, 0, 0.15); padding: 0.25rem; position: fixed; bottom: 0; left: 0; right: 0; display: flex; height: 3rem; box-sizing: border-box; } #input { border: none; padding: 0 1rem; flex-grow: 1; border-radius: 2rem; margin: 0.25rem; }
-      #input:focus { outline: none; } #form button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages > li { padding: 0.5rem 1rem; }
-      #messages > li:nth-child(odd) { background: #efefef; }
-      #input:disabled, form button:disabled { opacity: 0.5; }
-    </style>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Parking-Master/Gametime.js@latest/Gametime.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Parking-Master/Gametime.js-X@latest/example_chat.css">
+    <script src="https://cdn.jsdelivr.net/gh/Parking-Master/Gametime.js-X@latest/gametime.js"></script>
   </head>
   <body>
+    <div id="loading">Loading chat...</div>
     <ul id="messages"></ul>
-    <form id="form" action="">
-      <input id="input" autocomplete="off" /><button class="send">Send</button><button class="disconnect">Disconnect</button>
+    <form id="form">
+      <input id="input" placeholder="Type your message here...">
+      <button class="send">Send</button>
+      <button class="disconnect">Disconnect</button>
     </form>
     <script>
       (async () => {
-        // We'll try to connect to a Gametime.js-X socket server, but will use PubNub instead if not available
+        // We'll try to connect to a Gametime.js-X socket server, but will use PubNub instead if it is not available
         await gametime.setCustomServer("https://caribou-needed-implicitly.ngrok-free.app");
         await gametime.set("channel", "my-chat-room1234");
+        // You don't need to set your PubNub keys, though it is an alternative in case the public server doesn't work
         await gametime.set("key", "pub-c-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "sub-c-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx");
         await gametime.sustain();
 
-        function sendMessage(msg) {
-          var item = document.createElement("li");
-          item.textContent = msg;
+        document.querySelector("#loading").remove();
+
+        gametime.on("postChatMessage", function(message) {
+          let item = document.createElement("li");
+          item.textContent = message;
           messages.appendChild(item);
           window.scrollTo(0, document.body.scrollHeight);
-          var chatHistory = localStorage["history"];
-          var noBug = chatHistory === "" ? "" : ",";
-          localStorage.setItem("history", (chatHistory + noBug + encodeURIComponent(msg)).split(",").toString());
-        }
+          let chatHistory = localStorage["history"];
+          let noBug = chatHistory === "" ? "" : ",";
+          localStorage.setItem("history", (chatHistory + noBug + encodeURIComponent(message)).split(",").toString());
+        });
 
-        gametime.on("message", sendMessage);
-
-        var messages = document.getElementById("messages");
-        var form = document.getElementById("form");
-        var input = document.getElementById("input");
+        let messages = document.querySelector("#messages");
+        let form = document.querySelector("#form");
+        let input = document.querySelector("#input");
 
         if (!localStorage["history"]) {
           localStorage.setItem("history", "");
@@ -185,7 +181,7 @@ Chat room (HTML page):
         form.onsubmit = function(event) {
           event.preventDefault();
           if (input.value) {
-            gametime.run("message", [input.value]);
+            gametime.run("postChatMessage", [input.value]);
             input.value = "";
           }
         };
