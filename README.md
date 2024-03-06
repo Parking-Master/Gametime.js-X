@@ -1,4 +1,9 @@
 # Gametime.js-X
+![JavaScript](https://shields.io/badge/JavaScript-gray?logo=javascript&style=solid)
+[![Socket.io](https://shields.io/badge/Socket.io-gray?logo=socket.io&style=solid)](https://socket.io)
+[![PubNub](https://shields.io/badge/PubNub-gray?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAKlBMVEX////WRlvdaHn43eHheYjHAyDOJT7liZfLFC/wvMT77vDaV2r0zdLSNU1GhC5kAAAASElEQVR4AWMgBjAKChk4GrA4MLCmezSICjAKMLAKsEeKhoMZq4MFJRYCGaGhCoJHNwIZNyczCLJHgKQYGAS5UqEMhqlAkjAAACZUCxqGtqNHAAAAAElFTkSuQmCC&style=solid)](https://www.pubnub.com)
+[![Gametime.js](https://shields.io/badge/Gametime.js-gray?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAGFBMVEX//////O7/98v/+dv/+NX/+uP/9sP//vZE7si2AAAATklEQVQI12NgwAfYQ1wLwAwhQ2FFsIBiqaEQSIjVwE2FOQDIYBFXUWF0ADOUkgodwFJmaWApdkVGQSETkOoiQ+FkpQKIgWbiUMMLsdkIANG3CtuLxJkXAAAAAElFTkSuQmCC&style=solid)](https://gametime.js.org)
+
 This is a publish-subscribe API that uses a public socket server or PubNub to function. It is based on the previous projects [Gametime.js](https://github.com/Parking-Master/Gametime.js) and [Gametime.js-2.0](https://github.com/Parking-Master/Gametime.js-2.0). This project relies only on pure JavaScript to work.
 
 This API comes with a public socket server hosted by us. As an alternative, you can also use [PubNub](https://www.pubnub.com/), but that is not completely free and is a bit slower. If the script fails to connect to our socket server, it will try to connect to PubNub instead (only if you provide your Publish/Subscribe keys). There is also an option to use PubNub completely instead of our server.
@@ -234,7 +239,7 @@ Example chat room page:
 
 </details>
 
-[Live example of this page](https://parking-master.github.io/Gametime.js-X/example_chat.html)
+<img src="icons/lightbulb.svg"> Tip: Here is a [live example of this page](https://parking-master.github.io/Gametime.js-X/example_chat.html). Open the same page on multiple tabs, browsers, or devices, and try sending a message after the page is fully loaded.
 
 <br>
 <br>
