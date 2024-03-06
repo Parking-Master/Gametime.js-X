@@ -57,7 +57,7 @@ await gametime.set("key", "pub-c-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "sub-c-x
 
 <img src="icons/notebook.svg"> Note: Fill in the fields with your PubNub Publish/Subscribe keys.
 
-Using either of these methods will most likely connect you to a server. If it doesn't, make sure you PubNub API plan is active, and that our public server is currently up. Our server may go down briefly from time to time, so if it's down for you, please wait for it to come back up.
+Using either of these methods will most likely connect you to a server. If it doesn't, make sure your PubNub API plan is active, and that our public server is currently up. Our server may go down briefly from time to time, so if it's down for you, please wait for it to come back up.
 
 #### Sustaining a connection
 Next, you will use an asynchronous function to wait until Gametime.js-X has successfully connected you to a channel. This step is critical, so if you don't do it, the API will not successfully connect you to the channel.
