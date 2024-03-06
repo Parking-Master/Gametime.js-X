@@ -105,7 +105,7 @@ You can call the function whatever you want (in this example, "postMessage"), an
 - Method: `run(eventName: String, arguments: Array[])`
   - This method runs a function what was previously defined with `on()`.
 - Method: `sustain()`
-  - Waits for Gametime.js-X to sustain a connecting to a server and channel.
+  - Waits for Gametime.js-X to sustain a connection to the server(s) and channel.
 - Method: `set(globalSetting: String("key" | "channel"), channel | publishKey: String, subscribeKey: String)`
   - Sets a global setting such as "key" or "channel".
 - Method: `setCustomServer(socketServerURL: String)`
@@ -123,7 +123,7 @@ You can call the function whatever you want (in this example, "postMessage"), an
 - Method: `logger.warn(message: any)`
   - This is a built in `console.log` method with colored output and unicodes. This specific function is the _warn_ method.
 - Method: `logger.success(message: any)`
-  - This is a built in `console.log` method with colored output and unicodes. This specific function is the _info_ method.
+  - This is a built in `console.log` method with colored output and unicodes. This specific function is the _success_ method.
 - Method: `disconnect()`
   - Disconnect the current user from the channel.
 
