@@ -118,7 +118,7 @@
 &lt;script src="https://cdn.jsdelivr.net/gh/Parking-Master/Gametime.js-X@latest/gametime.min.js"&gt;&lt;/script&gt;
 </pre>
 
-        <img src="lightbulb.svg" class="icon"> Tip: always keep this library at the latest version for bug fixes and critical updates.
+        <img src="icons/lightbulb.svg" class="icon"> Tip: always keep this library at the latest version for bug fixes and critical updates.
         <h3>└ Usage</h3>
         
         <p>Setting up and using this API is simple and easy. Here, we'll show you how to connect to the Gametime.js-X socket server (or use PubNub instead), then we'll show you how to send a JavaScript function over the internet. We'll also show you additional methods like setting the max players on one channel, disconnecting player(s), and generating UUIDs for a user.</p>
@@ -151,7 +151,7 @@ await gametime.setCustomServer("https://caribou-needed-implicitly.ngrok-free.app
 await gametime.set("key", "pub-c-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "sub-c-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx");
 </pre>
         
-        <p><img src="notebook.svg" class="icon"> Note: Fill in the fields with your PubNub Publish/Subscribe keys.</p>
+        <p><img src="icons/notebook.svg" class="icon"> Note: Fill in the fields with your PubNub Publish/Subscribe keys.</p>
         
         <p>Using either of these methods will most likely connect you to a server. If it doesn't, make sure your PubNub API plan is active, and that our public server is currently up. Our server may go down briefly from time to time, so if it's down for you, please wait for it to come back up.</p>
         <h4>Sustaining a connection</h4>
@@ -164,7 +164,7 @@ await gametime.set("key", "pub-c-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "sub-c-x
 await gametime.sustain();
 </pre>
         
-        <p><img src="notebook.svg" class="icon"> Note: Make sure to seperate this function from the channel/server setup, and the actual API usage.</p>
+        <p><img src="icons/notebook.svg" class="icon"> Note: Make sure to seperate this function from the channel/server setup, and the actual API usage.</p>
         <h4>API usage & methods</h4>
         
         <p>Now that you've set up Gametime.js-X, you are ready to use it. First, you will define a function by default on the page, so every user on the page will have the functions to be run by other users (e.g. define a function that will show a message on the page when another user posts it). Then, you will run that using another function, and it will be run on the same page if other users are also connected to it.</p>
@@ -187,7 +187,7 @@ gametime.on("postMessage", function(user, message) {
 });
 </pre>
         
-        <p><img src="notebook.svg" class="icon"> Note: Functions run using Gametime.js-X will be run for every user in the channel. To specify every user except for the one who posted the message, we've included the line <code>if (user == gametime.player.position) return;</code> in the example.</p>
+        <p><img src="icons/notebook.svg" class="icon"> Note: Functions run using Gametime.js-X will be run for every user in the channel. To specify every user except for the one who posted the message, we've included the line <code>if (user == gametime.player.position) return;</code> in the example.</p>
         
         <p>Now, this is how you can run that function:</p>
         
@@ -227,7 +227,7 @@ gametime.run("postMessage", [gametime.player.position, "This is an example chat 
             <div class="sublist-item">Disconnect the current user from the channel.</div>
         </div>
         
-        <p><img src="notebook.svg" class="icon"> Note: These are all methods apart of the global gametime variable when the API is installed (e.g. gametime.on(), gametime.run(), etc.)</p>
+        <p><img src="icons/notebook.svg" class="icon"> Note: These are all methods apart of the global gametime variable when the API is installed (e.g. gametime.on(), gametime.run(), etc.)</p>
         <h3>└ Examples</h3>
         
         <p>Example on sending arguments through a function:</p>
@@ -267,7 +267,7 @@ gametime.setCustomServer("https://caribou-needed-implicitly.ngrok-free.app");
           <summary>Click to expand</summary>
         </details>
         
-        <p><img src="lightbulb.svg" class="icon"> Tip: Here is a <a href="/example_chat.html" target="_blank">live example of this page</a>. Open the same page on multiple tabs, browsers, or devices, and try sending a message after the page is fully loaded.</p>
+        <p><img src="icons/lightbulb.svg" class="icon"> Tip: Here is a <a href="/example_chat.html" target="_blank">live example of this page</a>. Open the same page on multiple tabs, browsers, or devices, and try sending a message after the page is fully loaded.</p>
 
         <br>
         <br>
