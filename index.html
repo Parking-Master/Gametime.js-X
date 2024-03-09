@@ -25,7 +25,7 @@
       }
       .header > .main-title {
         width: 100%;
-        font-size: 4vw;
+        font-size: 60px;
         font-family: "Gametime.js", Arial;
         display: flex;
         align-items: center;
@@ -47,6 +47,7 @@
         width: 75%;
         left: 50%;
         margin-left: calc(-75% / 2);
+        padding-bottom: 100px;
       }
       .icon {
         width: 20px;
@@ -83,11 +84,48 @@
         text-decoration: none;
         border-bottom: 1px solid currentColor;
       }
+      @media only screen and (max-width: 800px) {
+        .header > .main-title {
+          font-size: 50px;
+        }
+      }
+      @media only screen and (max-width: 700px) {
+        .header > .main-title {
+          font-size: 40px;
+        }
+      }
+      @media only screen and (max-width: 600px) {
+        .header > .main-title {
+          font-size: 30px;
+          padding-top: 30px;
+        }
+      }
+      @media only screen and (max-width: 500px) {
+        .header {
+          height: 200px;
+        }
+        .header > .main-title {
+          font-size: 20px;
+          padding-top: 50px;
+        }
+        .header > .status-img-wrapper img {
+          width: 50px;
+        }
+        .header-body-separater {
+          margin-top: 280px !important;
+        }
+      }
+      @media only screen and (max-width: 400px) {
+        .header > .status-img-wrapper img {
+          margin: 5px;
+        }
+      }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github.min.css">
     <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
   </head>
   <body>
+    <a href="/"><div style="z-index: 999999999999; display: inline-block; position: fixed; margin: 3px; background-image: url(/favicon.ico); width: 50px; height: 50px; border: 1px solid #333; background-position: center; background-size: 70px; background-color: #333; border-radius: 100%; border: 2px solid #333; top: 0; left: 0"></div></a>
     <div class="wrapper">
         <div class="header">
           <h1 class="main-title">Gametime.js-X</h1>
@@ -98,86 +136,61 @@
             <a class="nostyle" href="https://gametime.js.org"><img src="https://shields.io/badge/Gametime.js-gray?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAGFBMVEX//////O7/98v/+dv/+NX/+uP/9sP//vZE7si2AAAATklEQVQI12NgwAfYQ1wLwAwhQ2FFsIBiqaEQSIjVwE2FOQDIYBFXUWF0ADOUkgodwFJmaWApdkVGQSETkOoiQ+FkpQKIgWbiUMMLsdkIANG3CtuLxJkXAAAAAElFTkSuQmCC&style=solid"></a>
           </div>
         </div>
-        <div style="margin-top: 320px"></div>
+        <div style="margin-top: 320px" class="header-body-separater"></div>
         <div class="body">
         <p>This is a publish-subscribe API that uses a public socket server or PubNub to function. It is based on the previous projects <a href="https://github.com/Parking-Master/Gametime.js">Gametime.js</a> and <a href="https://github.com/Parking-Master/Gametime.js-2.0">Gametime.js-2.0</a>. This project relies only on pure JavaScript to work.</p>
-        
         <p>This API comes with a public socket server hosted by us. As an alternative, you can also use <a href="https://www.pubnub.com">PubNub</a>, but that is not completely free and is a bit slower. If the script fails to connect to our socket server, it will try to connect to PubNub instead (only if you provide your Publish/Subscribe keys). There is also an option to use PubNub completely instead of our server.</p>
         <h2>Documentation</h2>
         <h3>└ Installation</h3>
-        
         <p>Gametime.js-X should be embedded in your web page in order to function properly.</p>
-        
 <pre>
 &lt;script src="https://cdn.jsdelivr.net/gh/Parking-Master/Gametime.js-X@latest/gametime.js"&gt;&lt;/script&gt;
 </pre>
 
         <p>For the minified version:</p>
-        
 <pre>
 &lt;script src="https://cdn.jsdelivr.net/gh/Parking-Master/Gametime.js-X@latest/gametime.min.js"&gt;&lt;/script&gt;
 </pre>
 
         <img src="icons/lightbulb.svg" class="icon"> Tip: always keep this library at the latest version for bug fixes and critical updates.
         <h3>└ Usage</h3>
-        
         <p>Setting up and using this API is simple and easy. Here, we'll show you how to connect to the Gametime.js-X socket server (or use PubNub instead), then we'll show you how to send a JavaScript function over the internet. We'll also show you additional methods like setting the max players on one channel, disconnecting player(s), and generating UUIDs for a user.</p>
         <h4>Setting the channel</h4>
-        
         <p>Channels (in the context of a socket server) are like chat rooms. Only people inside them will be able to send and recieve messages to and from other users connected to the channel. It is required to create a unique identifier to separate channels in a game or chat room.</p>
-        
         <p>In other words, a group of users connected to a certain channel will be able to interact with each other over the internet using Gametime.js-X.</p>
-        
         <p>To set the channel, use the <code>set</code> method to specify a certain channel. Here is an example:</p>
-        
 <pre>
 await gametime.set("channel", "example-channel123");
 </pre>
-        
         <p>Specify the channel in the second field.</p>
         <h4>Connecting to a server</h4>
-        
         <p>To use the API, you need to connect to a socket server first.</p>
-        
         <p>To use our public socket server, use the <code>setCustomServer</code> method and specify our server's URL.</p>
-        
 <pre>
 await gametime.setCustomServer("https://caribou-needed-implicitly.ngrok-free.app");
 </pre>
-        
         <p>To use PubNub instead, <a href="https://admin.pubnub.com/#/login">log in</a> to your PubNub account first, and then go to your Dashboard and take note of your Publish/Subscribe keys. Then, specify them using the <code>set</code> method below:</p>
-        
 <pre>
 await gametime.set("key", "pub-c-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "sub-c-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx");
 </pre>
-        
         <p><img src="icons/notebook.svg" class="icon"> Note: Fill in the fields with your PubNub Publish/Subscribe keys.</p>
-        
         <p>Using either of these methods will most likely connect you to a server. If it doesn't, make sure your PubNub API plan is active, and that our public server is currently up. Our server may go down briefly from time to time, so if it's down for you, please wait for it to come back up.</p>
         <h4>Sustaining a connection</h4>
-        
         <p>Next, you will use an asynchronous function to wait until Gametime.js-X has successfully connected you to a channel. This step is critical, so if you don't do it, the API will not successfully connect you to the channel.</p>
-        
         <p>Here is an example of this, using the <code>sustain</code> method:</p>
-        
 <pre>
 await gametime.sustain();
 </pre>
-        
         <p><img src="icons/notebook.svg" class="icon"> Note: Make sure to separate this function from the channel/server setup, and the actual API usage.</p>
         <h4>API usage & methods</h4>
-        
         <p>Now that you've set up Gametime.js-X, you are ready to use it. First, you will define a function by default on the page, so every user on the page will have the functions to be run by other users (e.g. define a function that will show a message on the page when another user posts it). Then, you will run that using another function, and it will be run on the same page if other users are also connected to it.</p>
-        
         <div class="list">
           <div class="list-item">Method: <code>on(eventName: String, callback: Function(arguments))</code></div>
             <div class="sublist-item">This method defines a function to run later.</div>
           <div class="list-item">Method: <code>run(eventName: String, arguments: Array[])</code></div>
             <div class="sublist-item">This method runs a function what was previously defined with <code>on()</code>.</div>
         </div>
-        
         <p>Here is an example of defining a function:</p>
-        
 <pre>
 gametime.on("postMessage", function(user, message) {
   if (user == gametime.player.position) return;
@@ -186,18 +199,13 @@ gametime.on("postMessage", function(user, message) {
   document.querySelector(".exampleChatWrapper").textContent += message;
 });
 </pre>
-        
         <p><img src="icons/notebook.svg" class="icon"> Note: Functions run using Gametime.js-X will be run for every user in the channel. To specify every user except for the one who posted the message, we've included the line <code>if (user == gametime.player.position) return;</code> in the example.</p>
-        
         <p>Now, this is how you can run that function:</p>
-        
 <pre>
 gametime.run("postMessage", [gametime.player.position, "This is an example chat message!"]);
 </pre>
-        
         <p>You can call the function whatever you want (in this example, “postMessage”), and you can specify as many arguments as you want in your function. This is a basic example showing how to define a chat room post-message function, and then run it when a user wants to send a message. Feel free to customize this however you'd like and create whatever you want with it.</p>
         <h3>└ Methods</h3>
-        
         <div class="list">
           <div class="list-item">Method: <code>on(eventName: String, callback: Function(arguments))</code></div>
             <div class="sublist-item">This method defines a function to run later.</div>
@@ -226,12 +234,9 @@ gametime.run("postMessage", [gametime.player.position, "This is an example chat 
           <div class="list-item">Method: <code>disconnect()</code></div>
             <div class="sublist-item">Disconnect the current user from the channel.</div>
         </div>
-        
         <p><img src="icons/notebook.svg" class="icon"> Note: These are all methods apart of the global gametime variable when the API is installed (e.g. gametime.on(), gametime.run(), etc.)</p>
         <h3>└ Examples</h3>
-        
         <p>Example on sending arguments through a function:</p>
-        
 <pre>
 gametime.on("myCustomFunction", function(arg1, arg2, arg3) {
   console.log(arg1, arg2, arg3);
@@ -244,16 +249,12 @@ let arg3 = "baz";
 
 gametime.run("myCustomFunction", [arg1, arg2, arg3]);
 </pre>
-        
         <p>Example of setting the max amount of players/users:</p>
-        
 <pre>
 // The default is 16
 gametime.maxPlayers = 3;
 </pre>
-        
         <p>Example of setting the socket server:</p>
-        
 <pre>
 // Replace SERVER_URL with the URL to your socket server
 gametime.setCustomServer(SERVER_URL);
@@ -261,12 +262,10 @@ gametime.setCustomServer(SERVER_URL);
 // For example, this is the public socket server for Gametime.js-X
 gametime.setCustomServer("https://caribou-needed-implicitly.ngrok-free.app");
 </pre>
-        
         <p>Example chat room page:</p>
         <details>
           <summary>Click to expand</summary>
         </details>
-        
         <p><img src="icons/lightbulb.svg" class="icon"> Tip: Here is a <a href="/example_chat.html" target="_blank">live example of this page</a>. Open the same page on multiple tabs, browsers, or devices, and try sending a message after the page is fully loaded.</p>
 
         <br>
@@ -274,7 +273,6 @@ gametime.setCustomServer("https://caribou-needed-implicitly.ngrok-free.app");
 
         <p>For other open-source examples, see <a href="https://github.com/Parking-Master/FPS-X">FPS-X</a> which is an open source FPS game that you can build yourself with Gametime.js-X and pure JavaScript.</p>
         <h1>License</h1>
-        
         <p>This project is licensed under the MIT license, and is free to use, remake, and distribute however you like.</p>
         <p class="bold">Copyright © 2021-2024 Parking Master</p>
         </div>
