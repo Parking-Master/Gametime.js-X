@@ -28,7 +28,7 @@ For the minified version:
 Setting up and using this API is simple and easy. Here, we'll show you how to connect to the Gametime.js-X socket server (or use PubNub instead), then we'll show you how to send a JavaScript function over the internet. We'll also show you additional methods like setting the max players on one channel, disconnecting player(s), and generating UUIDs for a user.
 
 #### Setting the channel
-Channels (in the context of a socket server) are like chat rooms. Only people inside them will be able to send and recieve messages to and from other users connected to the channel. It is required to create a unique indentifier to seperate channels in a game or chat room.
+Channels (in the context of a socket server) are like chat rooms. Only people inside them will be able to send and recieve messages to and from other users connected to the channel. It is required to create a unique identifier to seperate channels in a game or chat room.
 
 In other words, a group of users connected to a certain channel will be able to interact with each other over the internet using Gametime.js-X.
 
@@ -68,7 +68,7 @@ Here is an example of this, using the `sustain` method:
 await gametime.sustain();
 ```
 
-<img src="icons/notebook.svg"> Note: Make sure to seperate this function from the channel/server setup, and the actual API usage.
+<img src="icons/notebook.svg"> Note: Make sure to separate this function from the channel/server setup, and the actual API usage.
 
 #### API usage & methods
 Now that you've set up Gametime.js-X, you are ready to use it. First, you will define a function by default on the page, so every user on the page will have the functions to be run by other users (e.g. define a function that will show a message on the page when another user posts it). Then, you will run that using another function, and it will be run on the same page if other users are also connected to it.
