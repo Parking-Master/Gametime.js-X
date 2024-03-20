@@ -169,6 +169,10 @@ await gametime.set("channel", "example-channel123");
 <pre>
 await gametime.setCustomServer("https://caribou-needed-implicitly.ngrok-free.app");
 </pre>
+        <p>You can also specify mutliple servers in case any are down:</p>
+<pre>
+await gametime.setCustomServer(["https://caribou-needed-implicitly.ngrok-free.app", "https://new-suitably-gnu.ngrok-free.app"]);
+</pre>
         <p>To use PubNub instead, <a href="https://admin.pubnub.com/#/login">log in</a> to your PubNub account first, and then go to your Dashboard and take note of your Publish/Subscribe keys. Then, specify them using the <code>set</code> method below:</p>
 <pre>
 await gametime.set("key", "pub-c-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "sub-c-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx");
@@ -261,6 +265,15 @@ gametime.setCustomServer(SERVER_URL);
 
 // For example, this is the public socket server for Gametime.js-X
 gametime.setCustomServer("https://caribou-needed-implicitly.ngrok-free.app");
+</pre>
+        <p>Example of setting multiple socket servers:</p>
+<pre>
+// If a specified socket server is not available, the API will use the next available one
+// If no servers are available, it will switch to PubNub instead
+gametime.setCustomServer([server1, server2, server3, server4]);
+
+// For example, these are two socket servers for Gametime.js-X
+gametime.setCustomServer(["https://caribou-needed-implicitly.ngrok-free.app", "https://new-suitably-gnu.ngrok-free.app"]);
 </pre>
         <p>Example chat room page:</p>
         <details>
