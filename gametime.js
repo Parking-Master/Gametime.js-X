@@ -8,19 +8,51 @@ window.gametime = {
   },
   customServer: null,
   setCustomServer: async function(url) {
-    try {
-      let response = await fetch(url);
-      if (response.status > 400) return gametime.logger.warn("The specified socket server for Gametime.js did not respond. Switching to PubNub instead.");
-    } catch {
-      return gametime.logger.warn("The specified socket server for Gametime.js did not respond. Switching to PubNub instead.");
+    if (url instanceof Array) {
+      async function fetchServer(serverUrl) {
+        try {
+          let response = await fetch(serverUrl);
+          if (response.status > 400) {
+            url = url.splice(1);
+            if (url[0]) {
+              await fetchServer(url[0]);
+            } else {
+              return gametime.logger.warn("The specified socket server(s) for Gametime.js did not respond. Switching to PubNub instead.");
+            }
+          } else {
+            gametime.customServer = {
+              events: {
+                message: null,
+                presence: null,
+              },
+              url: serverUrl.trim()
+            };
+          }
+        } catch {
+          url = url.splice(1);
+          if (url[0]) {
+            await fetchServer(url[0]);
+          } else {
+            return gametime.logger.warn("The specified socket server(s) for Gametime.js did not respond. Switching to PubNub instead.");
+          }
+        }
+      }
+      await fetchServer(url[0]);
+    } else {
+      try {
+        let response = await fetch(url);
+        if (response.status > 400) return gametime.logger.warn("The specified socket server for Gametime.js did not respond. Switching to PubNub instead.");
+      } catch {
+        return gametime.logger.warn("The specified socket server for Gametime.js did not respond. Switching to PubNub instead.");
+      }
+      gametime.customServer = {
+        events: {
+          message: null,
+          presence: null,
+        },
+        url: url.trim()
+      };
     }
-    gametime.customServer = {
-      events: {
-        message: null,
-        presence: null,
-      },
-      url: url.trim()
-    };
   },
   onconnect: null,
   ondisconnect: null,
@@ -152,7 +184,10 @@ window.gametime = {
         await (async () => {
           await import("https://cdn.jsdelivr.net/gh/socketio/socket.io/client-dist/socket.io.js");
           let socket = io(gametime.customServer.url, {
-            path: "/"
+            path: "/",
+            extraHeaders: {
+              "ngrok-skip-browser-warning": "69420"
+            }
           });
           window.PubNub = function() {
             this.publish = function(listener, callback = () => {}) { let data = btoa(encodeURIComponent(JSON.stringify(listener))); socket.emit("data", data); callback({}) };
