@@ -12,13 +12,13 @@ This API comes with a public socket server hosted by us. As an alternative, you 
 ### └ Installation
 Gametime.js-X should be embedded in your web page in order to function properly.
 
-```javascript
+```html
 <script src="https://cdn.jsdelivr.net/gh/Parking-Master/Gametime.js-X@latest/gametime.js"></script>
 ```
 
 For the minified version:
 
-```
+```html
 <script src="https://cdn.jsdelivr.net/gh/Parking-Master/Gametime.js-X@latest/gametime.min.js"></script>
 ```
 
