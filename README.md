@@ -49,6 +49,13 @@ To use our public socket server, use the `setCustomServer` method and specify ou
 await gametime.setCustomServer("https://caribou-needed-implicitly.ngrok-free.app");
 ```
 
+You can also specify mutliple servers in case any are down:
+
+```javascript
+await gametime.setCustomServer(["https://caribou-needed-implicitly.ngrok-free.app", "https://new-suitably-gnu.ngrok-free.app"]);
+```
+
+
 To use PubNub instead, [log in](https://admin.pubnub.com/#/login) to your PubNub account first, and then go to your Dashboard and take note of your Publish/Subscribe keys. Then, specify them using the `set` method below:
 
 ```
@@ -160,6 +167,18 @@ gametime.setCustomServer(SERVER_URL);
 
 // For example, this is the public socket server for Gametime.js-X
 gametime.setCustomServer("https://caribou-needed-implicitly.ngrok-free.app");
+```
+
+Example of setting multiple socket servers:
+
+
+```javascript
+// If a specified socket server is not available, the API will use the next available one
+// If no servers are available, it will switch to PubNub instead
+gametime.setCustomServer([server1, server2, server3, server4]);
+
+// For example, these are two socket servers for Gametime.js-X
+gametime.setCustomServer(["https://caribou-needed-implicitly.ngrok-free.app", "https://new-suitably-gnu.ngrok-free.app"]);
 ```
 
 Example chat room page:
