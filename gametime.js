@@ -11,7 +11,7 @@ window.gametime = {
     if (url instanceof Array) {
       async function fetchServer(serverUrl) {
         try {
-          let response = await fetch(serverUrl);
+          let response = await fetch(serverUrl, { headers: { "ngrok-skip-browser-warning": "69420" } });
           if (response.status > 400) {
             url = url.splice(1);
             if (url[0]) {
@@ -40,7 +40,7 @@ window.gametime = {
       await fetchServer(url[0]);
     } else {
       try {
-        let response = await fetch(url);
+        let response = await fetch(url, { headers: { "ngrok-skip-browser-warning": "69420" } });
         if (response.status > 400) return gametime.logger.warn("The specified socket server for Gametime.js did not respond. Switching to PubNub instead.");
       } catch {
         return gametime.logger.warn("The specified socket server for Gametime.js did not respond. Switching to PubNub instead.");
