@@ -1,4 +1,4 @@
-# Gametime.js-X
+# <img src="favicon.ico" width="20" height="20"> Gametime.js-X
 ![JavaScript](https://shields.io/badge/JavaScript-gray?logo=javascript&style=solid)
 [![Socket.io](https://shields.io/badge/Socket.io-gray?logo=socket.io&style=solid)](https://socket.io)
 [![PubNub](https://shields.io/badge/PubNub-gray?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAKlBMVEX////WRlvdaHn43eHheYjHAyDOJT7liZfLFC/wvMT77vDaV2r0zdLSNU1GhC5kAAAASElEQVR4AWMgBjAKChk4GrA4MLCmezSICjAKMLAKsEeKhoMZq4MFJRYCGaGhCoJHNwIZNyczCLJHgKQYGAS5UqEMhqlAkjAAACZUCxqGtqNHAAAAAElFTkSuQmCC&style=solid)](https://www.pubnub.com)
